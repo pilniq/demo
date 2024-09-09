@@ -1,0 +1,174 @@
+<html>
+<head>
+<title>Kaalutud kesmine</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<style>
+
+body {
+	margin: 20px;
+	font-family: monospace;
+	background-color: antiquewhite;
+	font-size: 20px;
+}
+
+.table {
+	display: block;
+	max-width: 700px;
+	width: 100%;
+}
+.row {
+	display: flex;
+}
+input[type=text], input[type=number] {
+  width: 20%;
+  padding: 12px 20px;
+  margin: 8px 0;
+  box-sizing: border-box;   
+}
+
+input[type=text] {
+	width: 60%;
+}
+
+.header {
+ color: navy;
+ font-weight: bold;
+ text-transform: uppercase; 
+
+}
+
+button {
+  background-color: #04AA6D; /* Green */
+  border: none;
+  color: white;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+}
+
+.result {
+	font-size: 30px; 
+	margin-bottom: 20px;
+}
+
+
+</style>
+</head>
+<body>
+<div class="table">
+	<div class="row header">
+		<span style="width:60%;">Aine</span>
+		<span style="width:20%;">Punktid</span>
+		<span style="width:20%;">Hinne</span>		
+	</div>
+	<div class="row">
+		<input type="text" name="thing_1"/>
+		<input type="number" min="0" max="10" value="0" name="amount_1" />
+		<input type="number" min="0" max="10" value="0" name="note_1"/>
+	</div>
+	<div class="row">
+		<input type="text" name="thing_2"/>
+		<input type="number" min="0" max="10" value="0" name="amount_2" />
+		<input type="number" min="0" max="10" value="0" name="note_2"/>
+	</div>	
+	<div class="row">
+		<input type="text" name="thing_3"/>
+		<input type="number" min="0" max="10" value="0" name="amount_3" />
+		<input type="number" min="0" max="10" value="0" name="note_3"/>
+	</div>
+	<div class="row">
+		<input type="text" name="thing_4"/>
+		<input type="number" min="0" max="10" value="0" name="amount_4" />
+		<input type="number" min="0" max="10" value="0" name="note_4"/>
+	</div>
+	<div class="row">
+		<input type="text" name="thing_5"/>
+		<input type="number" min="0" max="10" value="0" name="amount_5" />
+		<input type="number" min="0" max="10" value="0" name="note_5"/>
+	</div>
+	<div class="row">
+		<input type="text" name="thing_6"/>
+		<input type="number" min="0" max="10" value="0" name="amount_6" />
+		<input type="number" min="0" max="10" value="0" name="note_6"/>
+	</div>
+	<div class="row">
+		<input type="text" name="thing_7"/>
+		<input type="number" min="0" max="10" value="0" name="amount_7" />
+		<input type="number" min="0" max="10" value="0" name="note_7"/>
+	</div>
+</div>
+
+<button onclick="doCalc()">Calculate</button>
+<p class="result"></p>
+</body>
+<script>
+
+//Setting input value from cookie
+for (let i = 1; i<8; i++) {
+	document.querySelector('input[name = thing_' + i.toString()+ ']').value = getCookie('thing_'+i.toString());
+	document.querySelector('input[name = amount_' + i.toString()+ ']').value = getCookie('amount_'+i.toString());
+	document.querySelector('input[name = note_' + i.toString()+ ']').value = getCookie('note_'+i.toString());
+}
+
+function doCalc() {
+	//Calculate
+	
+	
+	let result_lugeja = 0; 
+	let result_nimetaja = 0;
+	for (let i = 1; i<8; i++) {
+		let amount = document.querySelector('input[name = amount_' + i.toString()+ ']').value;
+		let note = document.querySelector('input[name = note_' + i.toString()+ ']').value;
+		if (amount == '') amount = 0;
+		if (note == '') note = 0;
+		
+		amount = parseInt(amount);
+		note = parseInt(note);
+		
+		result_lugeja += amount * note;
+		result_nimetaja += amount;
+		
+		setCookie('thing_'+i.toString(), document.querySelector('input[name = thing_' + i.toString()+ ']').value, 100);
+		setCookie('amount_'+i.toString(), amount, 100);
+		setCookie('note_'+i.toString(), note, 100);
+				
+	}
+	
+	var weighted_average = result_nimetaja > 0 ? result_lugeja / result_nimetaja : 0;
+	
+	document.querySelector('.result').innerHTML = Math.round(weighted_average * 100) / 100;
+	
+}
+
+//Copied from w3school
+//Gets cookie from browser cookei store, identified via name
+function getCookie(cname) {
+  console.log('reading a cookie with name ' + cname );
+  let name = cname + "=";
+  let decodedCookie = decodeURIComponent(document.cookie);
+  let ca = decodedCookie.split(';');
+  for(let i = 0; i <ca.length; i++) {
+    let c = ca[i];
+    while (c.charAt(0) == ' ') {
+      c = c.substring(1);
+    }
+    if (c.indexOf(name) == 0) {
+      return c.substring(name.length, c.length);
+    }
+  }
+  return "";
+}
+
+//Copied from w3school
+//Sets cookie into browser cookie store - a cookie has a name, a value and how many days it is hold in the cookie memory
+function setCookie(cname, cvalue, exdays) {
+  console.log('setting a cookie with name ' + cname + " and value " + cvalue);
+  const d = new Date();
+  d.setTime(d.getTime() + (exdays*24*60*60*1000));
+  let expires = "expires="+ d.toUTCString();
+  document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
+}
+</script>
+</html>
