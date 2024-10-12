@@ -136,7 +136,7 @@ button {
 <script>
 
 //Setting input value from cookie
-for (let i = 1; i<8; i++) {
+for (let i = 1; i<14; i++) {
 	document.querySelector('input[name = thing_' + i.toString()+ ']').value = getCookie('thing_'+i.toString());
 	document.querySelector('input[name = amount_' + i.toString()+ ']').value = getCookie('amount_'+i.toString());
 	document.querySelector('input[name = note_' + i.toString()+ ']').value = getCookie('note_'+i.toString());
@@ -153,7 +153,7 @@ function doCalc() {
 		let note = document.querySelector('input[name = note_' + i.toString()+ ']').value;
 		if (amount == '') amount = 0;
 		if (note == '') note = 0;
-		
+		if (note == 0) continue;
 		amount = parseInt(amount);
 		note = parseInt(note);
 		
