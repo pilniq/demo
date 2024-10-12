@@ -153,17 +153,18 @@ function doCalc() {
 		let note = document.querySelector('input[name = note_' + i.toString()+ ']').value;
 		if (amount == '') amount = 0;
 		if (note == '') note = 0;
-		if (note == 0) continue;
+		
 		amount = parseInt(amount);
 		note = parseInt(note);
 		
-		result_lugeja += amount * note;
-		result_nimetaja += amount;
 		
 		setCookie('thing_'+i.toString(), document.querySelector('input[name = thing_' + i.toString()+ ']').value, 100);
 		setCookie('amount_'+i.toString(), amount, 100);
 		setCookie('note_'+i.toString(), note, 100);
-				
+		
+		if (note == 0) continue;
+		result_lugeja += amount * note;
+		result_nimetaja += amount;				
 	}
 	
 	var weighted_average = result_nimetaja > 0 ? result_lugeja / result_nimetaja : 0;
