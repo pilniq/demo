@@ -98,6 +98,36 @@ button {
 		<input type="number" min="0" max="10" value="0" name="amount_7" />
 		<input type="number" min="0" max="10" value="0" name="note_7"/>
 	</div>
+	<div class="row">
+		<input type="text" name="thing_8"/>
+		<input type="number" min="0" max="10" value="0" name="amount_8" />
+		<input type="number" min="0" max="10" value="0" name="note_8"/>
+	</div>
+	<div class="row">
+		<input type="text" name="thing_9"/>
+		<input type="number" min="0" max="10" value="0" name="amount_9" />
+		<input type="number" min="0" max="10" value="0" name="note_9"/>
+	</div>
+	<div class="row">
+		<input type="text" name="thing_10"/>
+		<input type="number" min="0" max="10" value="0" name="amount_10" />
+		<input type="number" min="0" max="10" value="0" name="note_10"/>
+	</div>
+	<div class="row">
+		<input type="text" name="thing_11"/>
+		<input type="number" min="0" max="10" value="0" name="amount_11" />
+		<input type="number" min="0" max="10" value="0" name="note_11"/>
+	</div>
+	<div class="row">
+		<input type="text" name="thing_12"/>
+		<input type="number" min="0" max="10" value="0" name="amount_12" />
+		<input type="number" min="0" max="10" value="0" name="note_12"/>
+	</div>
+	<div class="row">
+		<input type="text" name="thing_13"/>
+		<input type="number" min="0" max="10" value="0" name="amount_13" />
+		<input type="number" min="0" max="10" value="0" name="note_13"/>
+	</div>
 </div>
 
 <button onclick="doCalc()">Calculate</button>
@@ -118,7 +148,7 @@ function doCalc() {
 	
 	let result_lugeja = 0; 
 	let result_nimetaja = 0;
-	for (let i = 1; i<8; i++) {
+	for (let i = 1; i<14; i++) {
 		let amount = document.querySelector('input[name = amount_' + i.toString()+ ']').value;
 		let note = document.querySelector('input[name = note_' + i.toString()+ ']').value;
 		if (amount == '') amount = 0;
